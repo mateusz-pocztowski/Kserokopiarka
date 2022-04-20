@@ -2,7 +2,7 @@
 
 namespace Zadanie3
 {
-    class Fax : BaseDevice, IFax
+    public class Fax : BaseDevice, IFax
     {
         public int SendFaxCounter;
 

@@ -8,9 +8,9 @@ namespace Zadanie3
         private readonly Scanner scanner;
         private readonly Fax fax;
 
-        public int PrintCounter;
-        public int ScanCounter;
-        public int SendFaxCounter;
+        public int PrintCounter => printer.PrintCounter;
+        public int ScanCounter => scanner.ScanCounter;
+        public int SendFaxCounter => fax.SendFaxCounter;
 
         public MultidimensionalDevice()
         {
@@ -22,13 +22,11 @@ namespace Zadanie3
         public void Scan(out IDocument document, IDocument.FormatType formatType = IDocument.FormatType.JPG)
         {
             scanner.Scan(out document);
-            ScanCounter = scanner.ScanCounter;
         }
 
         public void Print(in IDocument document)
         {
             printer.Print(document);
-            PrintCounter = printer.PrintCounter;
         }
 
         public void ScanAndPrint()
@@ -38,14 +36,35 @@ namespace Zadanie3
             IDocument document;
             Scan(out document);
             Print(document);
-            ScanCounter = scanner.ScanCounter;
-            PrintCounter = printer.PrintCounter;
         }
 
         public void SendFax(string fax)
         {
             this.fax.SendFax(fax);
-            SendFaxCounter = this.fax.SendFaxCounter;
+        }
+
+
+        public override void PowerOff()
+        {
+            if (GetState() == IDevice.State.off) return;
+
+            state = IDevice.State.off;
+            printer.state = IDevice.State.off;
+            scanner.state = IDevice.State.off;
+            fax.state = IDevice.State.off;
+            Console.WriteLine("... Device is off !");
+        }
+
+        public override void PowerOn()
+        {
+            if (GetState() == IDevice.State.on) return;
+
+            state = IDevice.State.on;
+            printer.state = IDevice.State.on;
+            scanner.state = IDevice.State.on;
+            fax.state = IDevice.State.on;
+            Console.WriteLine("Device is on ...");
+            Counter++;
         }
     }
 }

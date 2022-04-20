@@ -2,7 +2,7 @@
 
 namespace Zadanie3
 {
-    class Printer : BaseDevice, IPrinter
+    public class Printer : BaseDevice, IPrinter
     {
         public int PrintCounter;
         public void Print(in IDocument document)

@@ -6,18 +6,19 @@ namespace Zadanie3
     {
         static void Main()
         {
-            var xerox = new Copier();
-            xerox.PowerOn();
-            IDocument doc1 = new PDFDocument("aaa.pdf");
-            xerox.Print(in doc1);
+            var device = new MultidimensionalDevice();
+            device.PowerOn();
 
-            IDocument doc2;
-            xerox.Scan(out doc2);
+            IDocument testDoc = new PDFDocument("test");
+            device.Print(in testDoc);
+            device.Scan(out testDoc);
+            device.Scan(out testDoc, formatType: IDocument.FormatType.PDF);
+            device.ScanAndPrint();
+            device.SendFax("test");
+            IDocument doc1;
+            device.Scan(out doc1, formatType: IDocument.FormatType.PDF);
 
-            xerox.ScanAndPrint();
-            System.Console.WriteLine(xerox.Counter);
-            System.Console.WriteLine(xerox.PrintCounter);
-            System.Console.WriteLine(xerox.ScanCounter);
+            Console.WriteLine(device.PrintCounter);
         }
     }
 }

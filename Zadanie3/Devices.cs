@@ -16,10 +16,10 @@ namespace Zadanie3
 
     public abstract class BaseDevice : IDevice
     {
-        protected IDevice.State state = IDevice.State.off;
+        public IDevice.State state = IDevice.State.off;
         public IDevice.State GetState() => state;
 
-        public void PowerOff()
+        public virtual void PowerOff()
         {
             if (GetState() == IDevice.State.off) return;
 
@@ -27,7 +27,7 @@ namespace Zadanie3
             Console.WriteLine("... Device is off !");
         }
 
-        public void PowerOn()
+        public virtual void PowerOn()
         {
             if (GetState() == IDevice.State.on) return;
 
@@ -36,7 +36,7 @@ namespace Zadanie3
             Counter++;
         }
 
-        public int Counter { get; private set; } = 0;
+        public int Counter { get; set; } = 0;
     }
 
     public interface IPrinter : IDevice

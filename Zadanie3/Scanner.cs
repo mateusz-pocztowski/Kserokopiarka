@@ -2,7 +2,7 @@
 
 namespace Zadanie3
 {
-    class Scanner : BaseDevice, IScanner
+    public class Scanner : BaseDevice, IScanner
     {
         public int ScanCounter;
 
